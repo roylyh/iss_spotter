@@ -25,11 +25,13 @@ const printPassTimes = function(passTimes) {
 //     console.log("It didn't work: ", error.message);
 //   });
 
-nextISSTimesForMyLocation((data)=>{
-  const { response } = JSON.parse(data);
-  printPassTimes(response);
-},(error)=>{
-  console.log("It didn't work: ", error.message);
-});
+nextISSTimesForMyLocation()
+  .then((passTimes) => {
+    printPassTimes(passTimes);
+  })
+  .catch((error) => {
+    console.log("It didn't work: ", error.message);
+  });
 
 
+// console.log(nextISSTimesForMyLocation());

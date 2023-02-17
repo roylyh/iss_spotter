@@ -26,12 +26,16 @@ const fetchISSFlyOverTimes = function(body) {
   return request(url);
 };
 
-const nextISSTimesForMyLocation = function(cb1,cb2) {
-  fetchMyIP()
+
+// .then() still return a promise ***
+const nextISSTimesForMyLocation = function() {
+  return fetchMyIP()
     .then(fetchCoordsByIP)
     .then(fetchISSFlyOverTimes)
-    .then(cb1)
-    .catch(cb2);
+    .then((data) => {
+      const { response } = JSON.parse(data);
+      return response;
+    });
 };
 
 module.exports = { nextISSTimesForMyLocation };
